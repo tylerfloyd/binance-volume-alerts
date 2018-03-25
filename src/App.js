@@ -9,8 +9,8 @@ import './App.css';
 
 import { getCoins } from './actions/coins';
 
-import Coin from './components/Card';
-import FilterMenu from './components/FilterMenu';
+import Coin from './common/components/Card';
+import MenuContainer from './menu/MenuContainer';
 
 class App extends Component {
 	componentWillMount() {
@@ -40,7 +40,7 @@ class App extends Component {
 		return (
 			<div className="App">
 				<Container>
-					<FilterMenu />
+					<MenuContainer />
 				</Container>
 				<Container>
 					<Card.Group centered>{_.map(coins, (data, coin) => this.renderCoins(data, coin))}</Card.Group>
