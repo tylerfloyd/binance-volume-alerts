@@ -1,41 +1,19 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { Container, Card } from 'semantic-ui-react';
 import _ from 'lodash';
-import firebase from 'firebase';
 
 import './App.css';
-import { firebaseConfig } from './firebaseConfig';
+
+import { getCoins } from './actions/coins';
 
 import Coin from './components/Card';
 import FilterMenu from './components/FilterMenu';
 
 class App extends Component {
-  state = {};
-
   componentWillMount() {
-    //If FireBase was already initialized, dont run it again
-    if (firebase.apps.length === 0) {
-      firebase.initializeApp({ ...firebaseConfig });
-    }
-
-    // Init FireBase database
-    const ref = firebase
-      .app()
-      .database()
-      .ref();
-
-    let coins = {};
-
-    // Once we have FireBase data, sort and set to state.
-    ref.on('value', snapshot => {
-      coins = snapshot.val().coins;
-      coins = _.orderBy(coins, ['updated'], ['desc']);
-
-      this.setState({
-        ...this.state,
-        ...coins
-      });
-    });
+    this.props.dispatch.getCoins();
   }
 
   // Component function that will build out the card elements
@@ -47,20 +25,8 @@ class App extends Component {
     }
   };
 
-  customSortCoins = (parameter, orderBy) => {
-    const coins = _.orderBy(
-      this.state,
-      ['date', 'time', parameter],
-      ['asc', 'asc', orderBy]
-    );
-
-    this.setState({
-      ...coins
-    });
-  };
-
   render() {
-    const coins = this.state;
+    const coins = this.props.coins;
     return (
       <div className="App">
         <Container>
@@ -75,5 +41,16 @@ class App extends Component {
     );
   }
 }
+const mapStateToProps = (state, ownProps) => {
+  return state;
+};
 
-export default App;
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ getCoins }, dispatch);
+};
+
+const mergeProps = (stateProps, dispatchProps, ownProps) => {
+  return { ...ownProps, ...stateProps, dispatch: dispatchProps };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(App);
