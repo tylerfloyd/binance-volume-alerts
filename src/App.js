@@ -13,10 +13,16 @@ import FilterMenu from './components/FilterMenu';
 
 class App extends Component {
   componentWillMount() {
+    /**
+     * When we know we are good to go,
+     * call into Firebase to get the coins
+     */
     this.props.dispatch.getCoins();
   }
 
-  // Component function that will build out the card elements
+  /**
+   * Component function that will build out the card elements
+   */
   renderCoins = (data, coin) => {
     if (data.updated) {
       return <Coin key={data.coin} data={data} coin={data.coin} />;
@@ -26,7 +32,8 @@ class App extends Component {
   };
 
   render() {
-    const coins = this.props.coins;
+    const { coins } = this.props;
+
     return (
       <div className="App">
         <Container>

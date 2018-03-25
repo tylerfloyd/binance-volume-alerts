@@ -10,6 +10,10 @@ export default function coinsReducer(state = {}, action) {
   switch (action.type) {
     case RECIEVED_COINS:
       console.log('RECIEVED_COINS Action');
+      /**
+       * TODO: Pull current sort configuration from state so we dont
+       * overwrite this when we get new values every minute
+       */
       const coins = _.orderBy(action.coins, ['updated'], ['desc']);
       return {
         ...state,
