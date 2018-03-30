@@ -22,11 +22,10 @@ export function getCoins() {
 	};
 }
 
-export function sortCoins(primary, secondary) {
+export function sortCoins(data) {
 	return {
 		type: SORT_COINS,
-		primary,
-		secondary
+		...data
 	};
 }
 
