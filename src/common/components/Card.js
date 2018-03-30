@@ -13,7 +13,11 @@ export default class Coin extends Component {
 		return (
 			<Card>
 				<Card.Content>
-					<Card.Header>{coin}</Card.Header>
+					<Card.Header>
+						<a href={'https://www.binance.com/trade.html?symbol=' + coin + '_BTC'} target="_blank" rel="noopener">
+							{coin}
+						</a>
+					</Card.Header>
 					<Card.Meta>Update: {localTime}</Card.Meta>
 					<Card.Description>
 						<Table celled>
