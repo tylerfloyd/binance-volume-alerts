@@ -7,6 +7,6 @@ export const primary = [
 ];
 
 export const secondary = [
-	{ key: 'ascending', value: 'ascending', text: 'Ascending' },
-	{ key: 'descending', value: 'descending', text: 'Descending' }
+	{ key: 'asc', value: 'asc', text: 'Ascending' },
+	{ key: 'desc', value: 'desc', text: 'Descending' }
 ];

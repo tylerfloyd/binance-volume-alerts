@@ -12,7 +12,7 @@ class Menu extends Component {
 		super(props);
 		this.state = {
 			primarySort: 'updated',
-			secondarySort: 'descending'
+			secondarySort: 'desc'
 		};
 	}
 
