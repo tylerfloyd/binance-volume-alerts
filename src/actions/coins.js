@@ -41,9 +41,3 @@ function getCoinsFulfilled(coins) {
 		coins
 	};
 }
-
-function getCoinsFailed() {
-	return {
-		type: FAILED_COINS
-	};
-}

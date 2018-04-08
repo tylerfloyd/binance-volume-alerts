@@ -3,7 +3,7 @@ export const primary = [
 	{ key: 'netVol', value: 'netVol', text: 'Hourly Volume' },
 	{ key: 'updated', value: 'updated', text: 'Last Updated' },
 	{ key: 'minuteVol', value: 'minuteVol', text: 'Minute Volume' },
-	{ key: 'pingCount', value: 'pingCount', text: 'Ping Count' }
+	{ key: 'pingCount', value: 'pingCount', text: 'Status' }
 ];
 
 export const secondary = [
