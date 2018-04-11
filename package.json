@@ -22,6 +22,7 @@
     "react-redux": "^5.0.7",
     "react-scripts": "1.1.1",
     "react-semantic-ui": "^0.2.0",
+    "reactour": "^1.6.5",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
     "semantic-ui-css": "^2.2.14",

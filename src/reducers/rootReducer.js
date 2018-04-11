@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux';
 
 import coins from './coinsReducer';
+import settings from './settingsReducer';
 
 const rootReducer = combineReducers({
-  coins
+	coins,
+	settings
 });
 
 export default rootReducer;

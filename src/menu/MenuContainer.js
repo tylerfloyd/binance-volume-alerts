@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Grid, Form, Dropdown } from 'semantic-ui-react';
+import { Grid, Form, Dropdown, Icon, Label } from 'semantic-ui-react';
 
 import { sortCoins } from '../actions/coins';
+import { toggleTour } from '../actions/settings';
 
 import { primary, secondary } from '../common/data/sortOptions';
 
@@ -24,6 +25,12 @@ class Menu extends Component {
 		dispatch.sortCoins(this.state);
 	};
 
+	startTour = event => {
+		const { dispatch } = this.props;
+		event.preventDefault();
+		dispatch.toggleTour();
+	};
+
 	render() {
 		return (
 			<Grid>
@@ -31,8 +38,14 @@ class Menu extends Component {
 					<Form onSubmit={this.handleSorting}>
 						<Form.Group widths="equal">
 							<Form.Field>
+								<Label className="startTour" as="a" color="blue" onClick={this.startTour}>
+									<Icon name="question" /> Help
+								</Label>
+							</Form.Field>
+							<Form.Field>
 								<Dropdown
 									name="primarySort"
+									className="primarySort"
 									placeholder="Primary Sort"
 									options={primary}
 									onChange={this.handleChange}
@@ -44,6 +57,7 @@ class Menu extends Component {
 							<Form.Field>
 								<Dropdown
 									name="secondarySort"
+									className="secondarySort"
 									placeholder="Secondary Sort"
 									options={secondary}
 									onChange={this.handleChange}
@@ -52,7 +66,7 @@ class Menu extends Component {
 									selection
 								/>
 							</Form.Field>
-							<Form.Button content="Sort" />
+							<Form.Button className="sortingAction" content="Sort" />
 						</Form.Group>
 					</Form>
 				</Grid.Row>
@@ -62,7 +76,7 @@ class Menu extends Component {
 }
 
 const mapDispatchToProps = dispatch => {
-	return bindActionCreators({ sortCoins }, dispatch);
+	return bindActionCreators({ sortCoins, toggleTour }, dispatch);
 };
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {

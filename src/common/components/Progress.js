@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Progress } from 'semantic-ui-react';
 
 export default class coinProgress extends Component {
-	getPercent = (count, minuteVol, netVol) => {
+	getPercent = (count, netVol) => {
 		const positiveVolume = netVol > 0;
 		let result = {
 			percent: 0,
@@ -26,11 +26,11 @@ export default class coinProgress extends Component {
 		return result;
 	};
 	render() {
-		const { count, minuteVol, netVol } = this.props;
-		const progressAttributes = this.getPercent(count, minuteVol, netVol);
+		const { count, netVol, size = 'medium' } = this.props;
+		const progressAttributes = this.getPercent(count, netVol);
 		return (
 			<div>
-				<Progress percent={progressAttributes.percent} color={progressAttributes.color} label={count} />
+				<Progress percent={progressAttributes.percent} color={progressAttributes.color} label={count} size={size} />
 			</div>
 		);
 	}

@@ -8,9 +8,11 @@ import ReactGA from 'react-ga';
 import './App.css';
 
 import { getCoins } from './actions/coins';
+import { toggleTour } from './actions/settings';
 
 import Coin from './common/components/Card';
 import MenuContainer from './menu/MenuContainer';
+import UserTour from './common/components/UserTour';
 
 class App extends Component {
 	componentWillMount() {
@@ -26,16 +28,21 @@ class App extends Component {
 	/**
 	 * Component function that will build out the card elements
 	 */
-	renderCoins = (data, coin) => {
+	renderCoins = (data, index) => {
 		if (data.updated) {
-			return <Coin key={data.coin} data={data} coin={data.coin} />;
+			return <Coin key={data.coin} data={data} coin={data.coin} index={index} />;
 		} else {
 			return null;
 		}
 	};
 
+	closeTour = () => {
+		const { dispatch } = this.props;
+		dispatch.toggleTour();
+	};
+
 	render() {
-		const { coins } = this.props;
+		const { coins, settings: { tourOpen } } = this.props;
 
 		return (
 			<div className="App">
@@ -45,6 +52,7 @@ class App extends Component {
 				<Container>
 					<Card.Group centered>{_.map(coins, (data, coin) => this.renderCoins(data, coin))}</Card.Group>
 				</Container>
+				<UserTour closeTour={this.closeTour} tourOpen={tourOpen} />
 			</div>
 		);
 	}
@@ -54,7 +62,7 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = dispatch => {
-	return bindActionCreators({ getCoins }, dispatch);
+	return bindActionCreators({ getCoins, toggleTour }, dispatch);
 };
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
