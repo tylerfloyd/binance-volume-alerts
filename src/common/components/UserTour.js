@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Tour from 'reactour';
-import { List, Divider, Button } from 'semantic-ui-react';
+import { List, Button } from 'semantic-ui-react';
 
 import Progress from './Progress';
 
@@ -60,7 +60,15 @@ export default class userTour extends Component {
 									</List.Description>
 								</List.Content>
 							</List.Item>
-							<Divider horizontal />
+						</List>
+					</div>
+				)
+			},
+			{
+				selector: '.coin_0 .pingCount',
+				content: () => (
+					<div>
+						<List>
 							<List.Item>
 								<List.Content>
 									<List.Header>
@@ -72,7 +80,15 @@ export default class userTour extends Component {
 									</List.Description>
 								</List.Content>
 							</List.Item>
-							<Divider horizontal />
+						</List>
+					</div>
+				)
+			},
+			{
+				selector: '.coin_0 .pingCount',
+				content: () => (
+					<div>
+						<List>
 							<List.Item>
 								<List.Content>
 									<List.Header>
@@ -84,7 +100,15 @@ export default class userTour extends Component {
 									</List.Description>
 								</List.Content>
 							</List.Item>
-							<Divider horizontal />
+						</List>
+					</div>
+				)
+			},
+			{
+				selector: '.coin_0 .pingCount',
+				content: () => (
+					<div>
+						<List>
 							<List.Item>
 								<List.Content>
 									<List.Header>
