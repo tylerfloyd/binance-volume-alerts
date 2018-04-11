@@ -12,20 +12,16 @@ const initialState = {
 export default function coinsReducer(state = initialState, action) {
 	switch (action.type) {
 		case RECIEVED_COINS:
-			console.log('RECIEVED_COINS Action');
 			const coins = _.orderBy(action.coins, [state.sort.primary], [state.sort.secondary]);
 			return {
 				sort: state.sort,
 				...coins
 			};
 		case REQUESTED_COINS:
-			console.log('REQUESTED_COINS Action');
 			return state;
 		case FAILED_COINS:
-			console.log('FAILED_COINS Action');
 			return state;
 		case SORT_COINS:
-			console.log('SORT_COINS Action');
 			const sortedCoins = _.orderBy(state, [action.primarySort], [action.secondarySort]);
 			return {
 				sort: {
