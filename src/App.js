@@ -13,6 +13,7 @@ import { toggleTour } from './actions/settings';
 import Coin from './common/components/Card';
 import MenuContainer from './menu/MenuContainer';
 import UserTour from './common/components/UserTour';
+import SortableTable from './common/components/Table';
 
 class App extends Component {
 	componentWillMount() {
@@ -42,7 +43,7 @@ class App extends Component {
 	};
 
 	render() {
-		const { coins, settings: { tourOpen } } = this.props;
+		const { coins, settings: { tourOpen = false, compact = false } } = this.props;
 
 		return (
 			<div className="App">
@@ -50,7 +51,8 @@ class App extends Component {
 					<MenuContainer />
 				</Container>
 				<Container>
-					<Card.Group centered>{_.map(coins, (data, coin) => this.renderCoins(data, coin))}</Card.Group>
+					{!compact && <Card.Group centered>{_.map(coins, (coin, index) => this.renderCoins(coin, index))}</Card.Group>}
+					{compact && <SortableTable coins={coins} />}
 				</Container>
 				<UserTour closeTour={this.closeTour} tourOpen={tourOpen} />
 			</div>

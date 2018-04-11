@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Grid, Form, Dropdown, Icon, Label } from 'semantic-ui-react';
+import { Grid, Form, Dropdown, Icon, Label, Checkbox } from 'semantic-ui-react';
 
 import { sortCoins } from '../actions/coins';
-import { toggleTour } from '../actions/settings';
+import { toggleTour, changeView } from '../actions/settings';
 
 import { primary, secondary } from '../common/data/sortOptions';
 
@@ -17,9 +17,9 @@ class Menu extends Component {
 		};
 	}
 
-	handleChange = (event, { name, value }) => this.setState({ [name]: value });
+	sortingSelection = (event, { name, value }) => this.setState({ [name]: value });
 
-	handleSorting = event => {
+	updateSorting = event => {
 		const { dispatch } = this.props;
 		event.preventDefault();
 		dispatch.sortCoins(this.state);
@@ -31,11 +31,17 @@ class Menu extends Component {
 		dispatch.toggleTour();
 	};
 
+	changeView = event => {
+		const { dispatch } = this.props;
+		event.preventDefault();
+		dispatch.changeView();
+	};
+
 	render() {
 		return (
 			<Grid>
 				<Grid.Row centered>
-					<Form onSubmit={this.handleSorting}>
+					<Form onSubmit={this.updateSorting}>
 						<Form.Group widths="equal">
 							<Form.Field>
 								<Label className="startTour" as="a" color="blue" onClick={this.startTour}>
@@ -48,7 +54,7 @@ class Menu extends Component {
 									className="primarySort"
 									placeholder="Primary Sort"
 									options={primary}
-									onChange={this.handleChange}
+									onChange={this.sortingSelection}
 									value={this.state.primarySort}
 									search
 									selection
@@ -60,13 +66,16 @@ class Menu extends Component {
 									className="secondarySort"
 									placeholder="Secondary Sort"
 									options={secondary}
-									onChange={this.handleChange}
+									onChange={this.sortingSelection}
 									value={this.state.secondarySort}
 									search
 									selection
 								/>
 							</Form.Field>
 							<Form.Button className="sortingAction" content="Sort" />
+							<Form.Field>
+								<Checkbox label="Compact View" toggle onClick={this.changeView} />
+							</Form.Field>
 						</Form.Group>
 					</Form>
 				</Grid.Row>
@@ -76,7 +85,7 @@ class Menu extends Component {
 }
 
 const mapDispatchToProps = dispatch => {
-	return bindActionCreators({ sortCoins, toggleTour }, dispatch);
+	return bindActionCreators({ sortCoins, toggleTour, changeView }, dispatch);
 };
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
