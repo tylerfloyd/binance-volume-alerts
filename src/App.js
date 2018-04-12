@@ -51,8 +51,10 @@ class App extends Component {
 					<MenuContainer compactView={compact} />
 				</Container>
 				<Container>
-					{!compact && <Card.Group centered>{_.map(coins, (coin, index) => this.renderCoins(coin, index))}</Card.Group>}
-					{compact && <SortableTable coins={coins} />}
+					{!compact && (
+						<Card.Group centered>{_.map(coins.list, (coin, index) => this.renderCoins(coin, index))}</Card.Group>
+					)}
+					{compact && <SortableTable coins={coins.list} />}
 				</Container>
 				<UserTour closeTour={this.closeTour} tourOpen={tourOpen} />
 			</div>

@@ -12,7 +12,6 @@ export default function settingsReducer(state = initialState, action) {
 				...state,
 				compact: !state.compact
 			};
-			return state;
 		case TOGGLE_TOUR:
 			return {
 				...state,

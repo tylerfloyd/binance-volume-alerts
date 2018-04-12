@@ -6,7 +6,8 @@ const initialState = {
 	sort: {
 		primary: 'updated',
 		secondary: 'desc'
-	}
+	},
+	list: []
 };
 
 export default function coinsReducer(state = initialState, action) {
@@ -15,7 +16,7 @@ export default function coinsReducer(state = initialState, action) {
 			const coins = _.orderBy(action.coins, [state.sort.primary], [state.sort.secondary]);
 			return {
 				sort: state.sort,
-				...coins
+				list: [...coins]
 			};
 		case REQUESTED_COINS:
 			return state;
@@ -28,7 +29,7 @@ export default function coinsReducer(state = initialState, action) {
 					primary: action.primarySort,
 					secondary: action.secondarySort
 				},
-				...sortedCoins
+				list: [...sortedCoins]
 			};
 		default:
 			return state;
