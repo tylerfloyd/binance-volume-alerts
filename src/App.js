@@ -48,7 +48,7 @@ class App extends Component {
 		return (
 			<div className="App">
 				<Container>
-					<MenuContainer />
+					<MenuContainer compactView={compact} />
 				</Container>
 				<Container>
 					{!compact && <Card.Group centered>{_.map(coins, (coin, index) => this.renderCoins(coin, index))}</Card.Group>}

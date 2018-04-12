@@ -38,6 +38,7 @@ class Menu extends Component {
 	};
 
 	render() {
+		const { compactView } = this.props;
 		return (
 			<Grid>
 				<Grid.Row centered>
@@ -48,32 +49,36 @@ class Menu extends Component {
 									<Icon name="question" /> Help
 								</Label>
 							</Form.Field>
-							<Form.Field>
-								<Dropdown
-									name="primarySort"
-									className="primarySort"
-									placeholder="Primary Sort"
-									options={primary}
-									onChange={this.sortingSelection}
-									value={this.state.primarySort}
-									search
-									selection
-								/>
-							</Form.Field>
-							<Form.Field>
-								<Dropdown
-									name="secondarySort"
-									className="secondarySort"
-									placeholder="Secondary Sort"
-									options={secondary}
-									onChange={this.sortingSelection}
-									value={this.state.secondarySort}
-									search
-									selection
-								/>
-							</Form.Field>
-							<Form.Button className="sortingAction" content="Sort" />
-							<Form.Field>
+							{!compactView && (
+								<Form.Field>
+									<Dropdown
+										name="primarySort"
+										className="primarySort"
+										placeholder="Primary Sort"
+										options={primary}
+										onChange={this.sortingSelection}
+										value={this.state.primarySort}
+										search
+										selection
+									/>
+								</Form.Field>
+							)}
+							{!compactView && (
+								<Form.Field>
+									<Dropdown
+										name="secondarySort"
+										className="secondarySort"
+										placeholder="Secondary Sort"
+										options={secondary}
+										onChange={this.sortingSelection}
+										value={this.state.secondarySort}
+										search
+										selection
+									/>
+								</Form.Field>
+							)}
+							{!compactView && <Form.Button className="sortingAction" content="Sort" />}
+							<Form.Field className="compactViewToggle">
 								<Checkbox label="Compact View" toggle onClick={this.changeView} />
 							</Form.Field>
 						</Form.Group>

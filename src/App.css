@@ -17,3 +17,8 @@ a.startTour {
 	position: relative;
 	top: 6px;
 }
+
+div.compactViewToggle div.ui.toggle.checkbox label:before,
+div.compactViewToggle div.ui.toggle.checkbox label:after {
+	top: 10px;
+}
