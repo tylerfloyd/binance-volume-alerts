@@ -69,7 +69,11 @@ export default class SortableTable extends Component {
 				<Table.Header>
 					<Table.Row>
 						{_.map(primary, sort => (
-							<Table.HeaderCell sorted={column === sort.value ? direction : null} onClick={this.sortTable(sort.value)}>
+							<Table.HeaderCell
+								key={sort.value}
+								sorted={column === sort.value ? direction : null}
+								onClick={this.sortTable(sort.value)}
+							>
 								{sort.text}
 							</Table.HeaderCell>
 						))}
