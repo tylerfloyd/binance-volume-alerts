@@ -23,7 +23,7 @@ export default function coinsReducer(state = initialState, action) {
 		case FAILED_COINS:
 			return state;
 		case SORT_COINS:
-			const sortedCoins = _.orderBy(state, [action.primarySort], [action.secondarySort]);
+			const sortedCoins = _.orderBy(state.list, [action.primarySort], [action.secondarySort]);
 			return {
 				sort: {
 					primary: action.primarySort,
