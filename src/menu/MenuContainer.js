@@ -9,6 +9,9 @@ import { toggleTour, changeView } from '../actions/settings';
 import { primary, secondary } from '../common/data/sortOptions';
 
 class Menu extends Component {
+	/**
+	 * TODO: move to mapStateToProps, this is not needed
+	 */
 	constructor(props) {
 		super(props);
 		this.state = {

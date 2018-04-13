@@ -56,7 +56,7 @@ export default class userTour extends Component {
 										<Progress count={1} netVol={1} size="small" />
 									</List.Header>
 									<List.Description>
-										Orange can usually be ignored. The volume will not have started coming into the coin.
+										Grey can usually be ignored. The volume will not have started coming into the coin.
 									</List.Description>
 								</List.Content>
 							</List.Item>

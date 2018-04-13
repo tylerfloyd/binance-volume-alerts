@@ -10,10 +10,10 @@ import './App.css';
 import { getCoins } from './actions/coins';
 import { toggleTour } from './actions/settings';
 
-import Coin from './common/components/Card';
 import MenuContainer from './menu/MenuContainer';
+import TableContainer from './compact/TableContainer';
+import Coin from './common/components/Card';
 import UserTour from './common/components/UserTour';
-import SortableTable from './common/components/Table';
 
 class App extends Component {
 	componentWillMount() {
@@ -54,7 +54,7 @@ class App extends Component {
 					{!compact && (
 						<Card.Group centered>{_.map(coins.list, (coin, index) => this.renderCoins(coin, index))}</Card.Group>
 					)}
-					{compact && <SortableTable coins={coins.list} />}
+					{compact && <TableContainer coins={coins.list} />}
 				</Container>
 				<UserTour closeTour={this.closeTour} tourOpen={tourOpen} />
 			</div>
