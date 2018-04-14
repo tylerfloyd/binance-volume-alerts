@@ -5,8 +5,6 @@ import { Container, Card } from 'semantic-ui-react';
 import _ from 'lodash';
 import ReactGA from 'react-ga';
 
-import './App.css';
-
 import { getCoins } from './actions/coins';
 import { toggleTour } from './actions/settings';
 

@@ -3,6 +3,9 @@
 	margin: 20px;
 }
 
+a {
+	color: #3498db;
+}
 .dimmed.dimmable > .ui.visible.dimmer,
 .ui.active.dimmer {
 	display: -ms-flexbox;
@@ -21,4 +24,28 @@ a.startTour {
 div.compactViewToggle div.ui.toggle.checkbox label:before,
 div.compactViewToggle div.ui.toggle.checkbox label:after {
 	top: 10px;
+}
+
+.ui.green.progress .bar,
+.ui.celled.table tr td.green {
+	/* background-color: #2ecc71; */
+	background: rgba(46, 204, 113, 0.4);
+}
+
+.ui.red.progress .bar,
+.ui.celled.table tr td.red {
+	/* background-color: #e74c3c; */
+	background: rgba(231, 76, 60, 0.4);
+}
+
+ui.grey.progress .bar,
+.ui.celled.table tr td.grey {
+	/* background-color: #7f8c8d; */
+	background: rgba(149, 165, 166, 0.4);
+}
+
+.ui.yellow.progress .bar,
+.ui.celled.table tr td.yellow {
+	/* background-color: #f1c40f; */
+	background: rgba(241, 196, 15, 0.4);
 }

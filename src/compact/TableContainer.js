@@ -47,18 +47,12 @@ class SortableTable extends Component {
 				positiveVolume
 			});
 
-		let warning = false,
-			positive = false,
-			negative = false;
-
 		return (
 			<Table.Row key={data.coin}>
 				<Table.Cell>{data.coin}</Table.Cell>
 				<Table.Cell>{data.minuteVol}</Table.Cell>
 				<Table.Cell>{data.netVol}</Table.Cell>
-				<Table.Cell warning={warning} positive={positive} negative={negative}>
-					{data.pingCount}
-				</Table.Cell>
+				<Table.Cell className={status.color}>{data.pingCount}</Table.Cell>
 				<Table.Cell>{moment(data.updated).format('YYYY-MM-DD HH:mm:ss')}</Table.Cell>
 			</Table.Row>
 		);
