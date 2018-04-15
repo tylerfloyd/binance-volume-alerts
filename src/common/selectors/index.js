@@ -26,3 +26,10 @@ export const determineStatus = createSelector(
 		return result;
 	}
 );
+
+export const getBinanceLink = createSelector(
+	(coin = '') => coin,
+	(coin = '') => {
+		return 'https://www.binance.com/trade.html?symbol=' + coin + '_BTC';
+	}
+);

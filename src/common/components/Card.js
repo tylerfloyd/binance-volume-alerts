@@ -5,6 +5,8 @@ import moment from 'moment';
 
 import Progress from './Progress';
 
+import { getBinanceLink } from '../selectors/index';
+
 export default class Coin extends Component {
 	render() {
 		const {
@@ -20,7 +22,7 @@ export default class Coin extends Component {
 			<Card className={`coin_` + index}>
 				<Card.Content>
 					<Card.Header className="coinHeader">
-						<a href={'https://www.binance.com/trade.html?symbol=' + coin + '_BTC'} target="_blank" rel="noopener">
+						<a href={getBinanceLink(coin)} target="_blank" rel="noopener">
 							{coin}
 						</a>
 					</Card.Header>

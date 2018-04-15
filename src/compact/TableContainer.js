@@ -7,37 +7,20 @@ import moment from 'moment';
 
 import { sortCoins } from '../actions/coins';
 
-import { determineStatus } from '../common/selectors/index';
+import { determineStatus, getBinanceLink } from '../common/selectors/index';
 
 import { primary } from '../common/data/sortOptions';
 
 class SortableTable extends Component {
-	/**
-	 * TODO: move to mapStateToProps
-	 */
-	state = {
-		primarySort: 'updated',
-		secondarySort: 'desc'
-	};
-
 	sortTable = sortedColumn => () => {
-		const { primarySort, secondarySort } = this.state;
+		const { primarySort, secondarySort } = this.props;
 		const { dispatch } = this.props;
-
-		if (primarySort !== sortedColumn) {
-			this.setState({
-				primarySort: sortedColumn,
-				secondarySort: 'asc'
-			});
-
-			return;
-		}
-
-		this.setState({
+		const sorting = {
+			primarySort: sortedColumn,
 			secondarySort: secondarySort === 'asc' ? 'desc' : 'asc'
-		});
+		};
 
-		dispatch.sortCoins(this.state);
+		dispatch.sortCoins(sorting);
 	};
 
 	renderRow = (data, index) => {
@@ -48,8 +31,12 @@ class SortableTable extends Component {
 			});
 
 		return (
-			<Table.Row key={data.coin}>
-				<Table.Cell>{data.coin}</Table.Cell>
+			<Table.Row key={data.coin} className={`coin_` + index}>
+				<Table.Cell>
+					<a href={getBinanceLink(data.coin)} target="_blank" rel="noopener">
+						{data.coin}
+					</a>
+				</Table.Cell>
 				<Table.Cell>{data.minuteVol}</Table.Cell>
 				<Table.Cell>{data.netVol}</Table.Cell>
 				<Table.Cell className={status.color}>{data.pingCount}</Table.Cell>
@@ -59,19 +46,19 @@ class SortableTable extends Component {
 	};
 
 	render() {
-		const { coins } = this.props;
-		const { primarySort, secondarySort } = this.state;
+		const { coins, primarySort, secondarySort } = this.props;
 		const translate = {
 			asc: 'ascending',
 			desc: 'descending'
 		};
 
 		return (
-			<Table sortable celled fixed>
+			<Table className="coinTable" sortable celled fixed>
 				<Table.Header>
 					<Table.Row>
 						{_.map(primary, sort => (
 							<Table.HeaderCell
+								className={sort.value}
 								key={sort.value}
 								sorted={primarySort === sort.value ? translate[secondarySort] : null}
 								onClick={this.sortTable(sort.value)}
@@ -87,6 +74,16 @@ class SortableTable extends Component {
 	}
 }
 
+const mapStateToProps = (state, ownProps) => {
+	const { coins: { sort, list } } = state;
+
+	return {
+		coins: list,
+		primarySort: sort.primary,
+		secondarySort: sort.secondary
+	};
+};
+
 const mapDispatchToProps = dispatch => {
 	return bindActionCreators({ sortCoins }, dispatch);
 };
@@ -95,4 +92,4 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 	return { ...ownProps, ...stateProps, dispatch: dispatchProps };
 };
 
-export default connect(null, mapDispatchToProps, mergeProps)(SortableTable);
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(SortableTable);

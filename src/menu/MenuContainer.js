@@ -9,23 +9,17 @@ import { toggleTour, changeView } from '../actions/settings';
 import { primary, secondary } from '../common/data/sortOptions';
 
 class Menu extends Component {
-	/**
-	 * TODO: move to mapStateToProps, this is not needed
-	 */
-	constructor(props) {
-		super(props);
-		this.state = {
-			primarySort: 'updated',
-			secondarySort: 'desc'
+	updateSorting = (event, data) => {
+		const { dispatch, primarySort, secondarySort } = this.props;
+		const sorting = {
+			primarySort,
+			secondarySort,
+			[data.name]: data.value
 		};
-	}
 
-	sortingSelection = (event, { name, value }) => this.setState({ [name]: value });
-
-	updateSorting = event => {
-		const { dispatch } = this.props;
 		event.preventDefault();
-		dispatch.sortCoins(this.state);
+
+		dispatch.sortCoins(sorting);
 	};
 
 	startTour = event => {
@@ -41,11 +35,12 @@ class Menu extends Component {
 	};
 
 	render() {
-		const { compactView } = this.props;
+		const { compactView, primarySort, secondarySort } = this.props;
+
 		return (
 			<Grid>
 				<Grid.Row centered>
-					<Form onSubmit={this.updateSorting}>
+					<Form>
 						<Form.Group widths="equal">
 							<Form.Field>
 								<Label className="startTour" as="a" color="blue" onClick={this.startTour}>
@@ -59,8 +54,8 @@ class Menu extends Component {
 										className="primarySort"
 										placeholder="Primary Sort"
 										options={primary}
-										onChange={this.sortingSelection}
-										value={this.state.primarySort}
+										value={primarySort}
+										onChange={this.updateSorting}
 										search
 										selection
 									/>
@@ -73,14 +68,13 @@ class Menu extends Component {
 										className="secondarySort"
 										placeholder="Secondary Sort"
 										options={secondary}
-										onChange={this.sortingSelection}
-										value={this.state.secondarySort}
+										value={secondarySort}
+										onChange={this.updateSorting}
 										search
 										selection
 									/>
 								</Form.Field>
 							)}
-							{!compactView && <Form.Button className="sortingAction" content="Sort" />}
 							<Form.Field className="compactViewToggle">
 								<Checkbox label="Compact View" toggle onClick={this.changeView} />
 							</Form.Field>
@@ -92,6 +86,16 @@ class Menu extends Component {
 	}
 }
 
+const mapStateToProps = (state, ownProps) => {
+	const { coins: { sort }, settings: { compact } } = state;
+
+	return {
+		compactView: compact,
+		primarySort: sort.primary,
+		secondarySort: sort.secondary
+	};
+};
+
 const mapDispatchToProps = dispatch => {
 	return bindActionCreators({ sortCoins, toggleTour, changeView }, dispatch);
 };
@@ -100,4 +104,4 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 	return { ...ownProps, ...stateProps, dispatch: dispatchProps };
 };
 
-export default connect(null, mapDispatchToProps, mergeProps)(Menu);
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(Menu);

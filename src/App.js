@@ -46,7 +46,7 @@ class App extends Component {
 		return (
 			<div className="App">
 				<Container>
-					<MenuContainer compactView={compact} />
+					<MenuContainer />
 				</Container>
 				<Container>
 					{!compact && (
@@ -54,11 +54,12 @@ class App extends Component {
 					)}
 					{compact && <TableContainer coins={coins.list} />}
 				</Container>
-				<UserTour closeTour={this.closeTour} tourOpen={tourOpen} />
+				<UserTour closeTour={this.closeTour} tourOpen={tourOpen} compactView={compact} />
 			</div>
 		);
 	}
 }
+
 const mapStateToProps = (state, ownProps) => {
 	return state;
 };
