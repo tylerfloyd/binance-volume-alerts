@@ -12,6 +12,7 @@ import MenuContainer from './menu/MenuContainer';
 import TableContainer from './compact/TableContainer';
 import Coin from './common/components/Card';
 import UserTour from './common/components/UserTour';
+import Loading from './common/components/Loading';
 
 class App extends Component {
 	componentWillMount() {
@@ -41,7 +42,7 @@ class App extends Component {
 	};
 
 	render() {
-		const { coins, settings: { tourOpen = false, compact = false } } = this.props;
+		const { coins, settings: { tourOpen = false, compact = false, pendingCoins = false } } = this.props;
 
 		return (
 			<div className="App">
@@ -49,9 +50,12 @@ class App extends Component {
 					<MenuContainer />
 				</Container>
 				<Container>
-					{!compact && (
-						<Card.Group centered>{_.map(coins.list, (coin, index) => this.renderCoins(coin, index))}</Card.Group>
-					)}
+					<React.Fragment>
+						<Loading pendingCoins={pendingCoins} />
+						{!compact && (
+							<Card.Group centered>{_.map(coins.list, (coin, index) => this.renderCoins(coin, index))}</Card.Group>
+						)}
+					</React.Fragment>
 					{compact && <TableContainer coins={coins.list} />}
 				</Container>
 				<UserTour closeTour={this.closeTour} tourOpen={tourOpen} compactView={compact} />

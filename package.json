@@ -20,7 +20,7 @@
     "react-dom": "^16.2.0",
     "react-ga": "^2.4.1",
     "react-redux": "^5.0.7",
-    "react-scripts": "1.1.1",
+    "react-scripts": "^1.1.4",
     "react-semantic-ui": "^0.2.0",
     "reactour": "^1.6.5",
     "redux": "^3.7.2",
@@ -41,5 +41,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+  "devDependencies": {}
 }

@@ -1,11 +1,12 @@
+a {
+	color: #3498db;
+}
+
 .App {
 	text-align: center;
 	margin: 20px;
 }
 
-a {
-	color: #3498db;
-}
 .dimmed.dimmable > .ui.visible.dimmer,
 .ui.active.dimmer {
 	display: -ms-flexbox;
