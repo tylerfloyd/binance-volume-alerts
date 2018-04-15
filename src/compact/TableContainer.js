@@ -13,7 +13,7 @@ import { primary } from '../common/data/sortOptions';
 
 class SortableTable extends Component {
 	sortTable = sortedColumn => () => {
-		const { primarySort, secondarySort } = this.props;
+		const { secondarySort } = this.props;
 		const { dispatch } = this.props;
 		const sorting = {
 			primarySort: sortedColumn,
